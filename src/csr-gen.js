@@ -58,12 +58,14 @@ module.exports = function(domain, options, callback){
 	if(!options.password) options.password = '';
 	if(!options.keyName) options.keyName = domain+'.key';
 	if(!options.csrName) options.csrName = domain+'.csr';
+	if(!options.days) options.days = '999 ';
 
 	// Needed to generate subject string
 	options.domain = domain;
 
 	var keyPath = options.outputDir+options.keyName;
 	var csrPath = options.outputDir+options.csrName;
+	var days = options.days;
 
 	var read = options.read;
 	var destroy = options.destroy;
@@ -74,10 +76,13 @@ module.exports = function(domain, options, callback){
 
 	var opts = [
 		'req',
+		'-x509',
+		'-nodes',
+		'-days', days,
+		'-subj', subj,
 		'-newkey','rsa:2048',
 		'-keyout', keyPath,
-		'-out', csrPath,
-		'-subj', subj
+		'-out', csrPath
 	];
 
 	var passFile = options.password != '' ? "pass.txt" : false;
