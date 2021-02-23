@@ -61,7 +61,7 @@ module.exports = function (domain, options, callback) {
     if (!options.password) options.password = '';
     if (!options.keyName) options.keyName = domain + '.key';
     if (!options.csrName) options.csrName = domain + '.csr';
-    if (!options.days) options.days = '999 ';
+    if (!options.days) options.days = '999';
 
     // Needed to generate subject string
     options.domain = domain;
